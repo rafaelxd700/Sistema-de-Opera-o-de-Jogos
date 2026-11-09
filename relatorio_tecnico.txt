@@ -1,0 +1,144 @@
+RELATÓRIO TÉCNICO – SISTEMA DE OPERAÇÃO DE JOGOS (GAMEOPS)
+
+Integrantes:
+
+Rafael Del Antonio
+Leticia
+Pierre
+1. INTRODUÇÃO
+
+O projeto Sistema de Operação de Jogos (GameOps) foi desenvolvido utilizando a linguagem C++ e tem como objetivo organizar o cadastro de jogadores, controlar a entrada de participantes nas partidas, armazenar informações sobre partidas e registrar ações realizadas durante a execução do sistema.
+
+Para desenvolver o sistema, foram utilizadas diferentes estruturas de dados dinâmicas, como Árvore Binária de Busca (ABB), Fila FIFO, Pilha LIFO e Lista Simplesmente Encadeada. Também foram implementados algoritmos de ordenação e busca, permitindo organizar e localizar informações dos jogadores.
+
+2. DECISÕES DE PROJETO E ESTRUTURAS UTILIZADAS
+2.1 Árvore Binária de Busca (ABB)
+
+A Árvore Binária de Busca foi escolhida para armazenar os dados dos jogadores, utilizando o ID como chave de organização.
+
+Cada jogador possui informações como ID, nome, nível e pontuação. A árvore organiza os registros de maneira que IDs menores ficam à esquerda e IDs maiores ficam à direita.
+
+Essa estrutura facilita a busca de jogadores e permite realizar uma listagem em ordem crescente de ID por meio do percurso in-order.
+
+Complexidade esperada:
+
+Busca: O(log n) em uma árvore balanceada e O(n) no pior caso.
+Inserção: O(log n) em uma árvore balanceada e O(n) no pior caso.
+Percurso completo: O(n).
+
+É importante destacar que a árvore implementada não possui balanceamento automático, portanto, seu desempenho depende da ordem de inserção dos jogadores.
+
+2.2 Fila FIFO
+
+A fila foi escolhida para controlar os jogadores que aguardam atendimento para entrar em uma partida.
+
+Seu funcionamento segue o princípio FIFO (First In, First Out), ou seja, o primeiro jogador que entra na fila é o primeiro a ser atendido.
+
+A implementação utiliza uma lista encadeada, com ponteiros para o início (frente) e o final (fim) da fila.
+
+Essa escolha permite adicionar jogadores ao final e atender jogadores pelo início, mantendo a ordem de chegada.
+
+Complexidade esperada:
+
+Inserção: O(1).
+Remoção/atendimento: O(1).
+Listagem: O(n).
+2.3 Pilha LIFO
+
+A pilha foi escolhida para armazenar o histórico de ações realizadas no sistema.
+
+Seu funcionamento segue o princípio LIFO (Last In, First Out), no qual a última ação registrada é a primeira a ser removida.
+
+A implementação utiliza nós encadeados e um ponteiro chamado topo, responsável por indicar o elemento mais recente.
+
+Essa estrutura permite registrar ações, listar o histórico e remover a última ação registrada.
+
+Complexidade esperada:
+
+Inserção: O(1).
+Remoção: O(1).
+Listagem: O(n).
+2.4 Lista Simplesmente Encadeada
+
+A lista simplesmente encadeada foi escolhida para armazenar o histórico de partidas cadastradas.
+
+Cada elemento possui informações como ID, nome do jogo, data, quantidade de jogadores e um ponteiro para o próximo elemento.
+
+Essa estrutura permite inserir novas partidas no final da lista, consultar os registros e remover partidas utilizando seu ID.
+
+Complexidade esperada:
+
+Inserção no final: O(n).
+Busca por ID: O(n).
+Remoção por ID: O(n).
+Listagem: O(n).
+3. ALGORITMOS DE ORDENAÇÃO E BUSCA
+3.1 Bubble Sort
+
+O sistema utiliza o algoritmo Bubble Sort para ordenar os jogadores de acordo com suas pontuações.
+
+Primeiramente, os jogadores são copiados da Árvore Binária de Busca para um vetor. Em seguida, o algoritmo compara os elementos vizinhos e realiza trocas quando a pontuação do elemento atual é maior que a do próximo.
+
+O resultado é uma listagem dos jogadores em ordem crescente de pontuação.
+
+Complexidade esperada:
+
+Melhor caso: O(n²), considerando a implementação utilizada.
+Caso médio: O(n²).
+Pior caso: O(n²).
+Espaço auxiliar: O(n).
+3.2 Busca Sequencial
+
+A busca sequencial percorre os elementos do vetor um por um até encontrar o ID procurado ou chegar ao final.
+
+Complexidade esperada:
+
+Melhor caso: O(1).
+Caso médio: O(n).
+Pior caso: O(n).
+3.3 Busca Binária
+
+A busca binária utiliza um vetor ordenado por ID para localizar um jogador.
+
+O algoritmo compara o ID procurado com o elemento central e descarta metade dos elementos a cada iteração, reduzindo a quantidade de comparações necessárias.
+
+Complexidade esperada:
+
+Melhor caso: O(1).
+Caso médio: O(log n).
+Pior caso: O(log n).
+
+O sistema também realiza uma comparação entre a quantidade de comparações executadas pela busca sequencial e pela busca binária.
+
+4. GERENCIAMENTO DE MEMÓRIA
+
+O gerenciamento de memória é realizado manualmente por meio de ponteiros e alocação dinâmica utilizando os operadores new e delete.
+
+Na árvore binária, cada jogador é armazenado em um nó criado dinamicamente, que possui ponteiros para os filhos esquerdo e direito.
+
+Na fila e na pilha, os elementos também são alocados dinamicamente e conectados por meio de ponteiros.
+
+Na lista de partidas, cada novo registro é criado dinamicamente e conectado ao próximo elemento.
+
+Para evitar vazamentos de memória, foram implementadas funções específicas para liberar os elementos alocados:
+
+liberarArvore(): libera os nós da árvore de forma recursiva.
+liberarFila(): libera todos os elementos da fila.
+liberarPilha(): libera todos os elementos da pilha.
+liberarPartidas(): libera todos os elementos da lista de partidas.
+
+Essas funções são chamadas ao final da execução do programa, garantindo a liberação da memória dinâmica utilizada pelas estruturas.
+
+Além disso, os elementos removidos durante a execução, como jogadores atendidos na fila, ações desfeitas e partidas excluídas, também têm sua memória liberada utilizando delete.
+
+5. CONCLUSÃO
+
+O desenvolvimento do Sistema de Operação de Jogos permitiu aplicar conceitos importantes de estruturas de dados e algoritmos utilizando a linguagem C++.
+
+A Árvore Binária de Busca foi utilizada para organizar e localizar jogadores por ID, enquanto a Fila FIFO controla a ordem de atendimento dos participantes. A Pilha LIFO permite armazenar e remover ações do histórico, e a Lista Simplesmente Encadeada possibilita gerenciar as partidas cadastradas.
+
+Também foram implementados o algoritmo Bubble Sort, a busca sequencial e a busca binária, permitindo trabalhar com organização de dados e comparação de desempenho.
+
+O projeto proporcionou conhecimentos práticos sobre ponteiros, alocação dinâmica de memória, complexidade de algoritmos e integração de diferentes estruturas de dados.
+
+Conclui-se que as estruturas e os algoritmos utilizados atendem às funcionalidades propostas pelo sistema e demonstram aplicações práticas dos conceitos estudados na disciplina.
